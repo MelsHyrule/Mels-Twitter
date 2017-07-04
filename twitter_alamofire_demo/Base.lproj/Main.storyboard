@@ -125,6 +125,7 @@
                                                     <state key="normal" image="favor-icon"/>
                                                     <state key="selected" image="favor-icon-red"/>
                                                     <connections>
+                                                        <action selector="likeButtonPressed:" destination="U1g-kw-izy" eventType="touchUpInside" id="9bY-f8-R7d"/>
                                                         <action selector="retweetButtonPressed:" destination="U1g-kw-izy" eventType="touchUpInside" id="zl9-vT-YZh"/>
                                                     </connections>
                                                 </button>
@@ -186,10 +187,11 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="datePostedLabel" destination="Er4-lB-Ic2" id="wxN-tq-xpd"/>
+                                            <outlet property="likeCountLabel" destination="jJV-ca-AoV" id="PS1-Ej-2wv"/>
                                             <outlet property="nameLabel" destination="scv-WY-pWM" id="hIT-Zq-Ldn"/>
                                             <outlet property="retweetCountLabel" destination="zNv-TV-LLl" id="w7B-zu-xky"/>
-                                            <outlet property="retweetLabel" destination="zNv-TV-LLl" id="k4Z-mt-cAm"/>
                                             <outlet property="screenNameLabel" destination="fhC-BD-XtV" id="glp-7a-gDo"/>
+                                            <outlet property="tweetLabel" destination="Ler-8B-n8p" id="Own-Ev-b3I"/>
                                             <outlet property="userImageView" destination="3Iu-Zr-z78" id="w9H-Pe-KwD"/>
                                         </connections>
                                     </tableViewCell>

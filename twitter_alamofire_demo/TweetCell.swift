@@ -15,22 +15,24 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var datePostedLabel: UILabel!
-    @IBOutlet weak var tweetTextView: UITextView!
-    @IBOutlet weak var replyCountLabel: UILabel!
+    @IBOutlet weak var tweetLabel: UILabel!
+    //@IBOutlet weak var tweetTextView: UITextView!
+    //@IBOutlet weak var replyCountLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var likeCountLabel: UILabel!
     
     var tweet: Tweet! {
         didSet {
             
-            //userImageView.image = af_setImage(withURL: tweet.user.profile_image_url)
+            userImageView.af_setImage(withURL: tweet.user.profilePictureURL!)
+            
             screenNameLabel.text = tweet.user.screenName!
             nameLabel.text = tweet.user.name as! String
             datePostedLabel.text = tweet.createdAtString
-            tweetTextView.text = tweet.text
+            tweetLabel.text = tweet.text
             //replyCountLabel.text =
-            retweetCountLabel.text = tweet.retweetCount as! String
-            likeCountLabel.text = tweet.favoriteCount as! String
+            retweetCountLabel.text = String(tweet.retweetCount)
+            likeCountLabel.text = String(tweet.favoriteCount!)
             
         }
     }
@@ -53,11 +55,11 @@ class TweetCell: UITableViewCell {
         if (tweet.retweeted) {
             tweet.retweeted = false
             tweet.retweetCount = tweet.retweetCount - 1
-            retweetCountLabel.text = tweet.retweetCount as! String
+            retweetCountLabel.text = String(tweet.retweetCount)
         } else {
             tweet.retweeted = true
             tweet.retweetCount = tweet.retweetCount + 1
-            retweetCountLabel.text = tweet.retweetCount as! String
+            retweetCountLabel.text = String(tweet.retweetCount)
         }
     }
     
@@ -66,11 +68,11 @@ class TweetCell: UITableViewCell {
         if (tweet.favorited!) {
             tweet.favorited = false
             tweet.favoriteCount = tweet.favoriteCount! - 1
-            likeCountLabel.text = tweet.favoriteCount as! String
+            likeCountLabel.text = String(tweet.favoriteCount!)
         } else {
             tweet.favorited = true
             tweet.favoriteCount = tweet.favoriteCount! + 1
-            likeCountLabel.text = tweet.favoriteCount as! String
+            likeCountLabel.text = String(tweet.favoriteCount!)
 
         }
     }
