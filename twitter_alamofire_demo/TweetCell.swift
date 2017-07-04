@@ -44,9 +44,7 @@ class TweetCell: UITableViewCell {
         
     
     @IBAction func replyButtonPressed(_ sender: Any) {
-        
-        
-        
+        //code
     }
     
     
@@ -76,9 +74,6 @@ class TweetCell: UITableViewCell {
 
         }
     }
-    
-    
-    
     
     
     override func setSelected(_ selected: Bool, animated: Bool) {

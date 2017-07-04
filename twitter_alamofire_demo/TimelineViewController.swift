@@ -17,6 +17,11 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        
+        tableView.insertSubview(refreshControl, at: 0)
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -27,6 +32,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             if let tweets = tweets {
                 self.tweets = tweets
                 self.tableView.reloadData()
+                refreshControl.endRefreshing()
             } else if let error = error {
                 print("Error getting home timeline: " + error.localizedDescription)
             }
@@ -41,7 +47,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
         cell.tweet = tweets[indexPath.row]
-        cell.userImageView.layer.cornerRadius = 5
+        cell.userImageView.layer.cornerRadius = cell.userImageView.frame.size.width/2
         cell.userImageView.layer.masksToBounds = true
         
         return cell
@@ -71,5 +77,23 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
      // Pass the selected object to the new view controller.
      }
      */
+    
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        
+        APIManager.shared.getHomeTimeLine { (tweets, error) in
+            if let tweets = tweets {
+                self.tweets = tweets
+                self.tableView.reloadData()
+                refreshControl.endRefreshing()
+                print("refresh called")
+            } else if let error = error {
+                print("Error getting home timeline: " + error.localizedDescription)
+            }
+        }
+        
+        
+        refreshControl.endRefreshing()
+    }
+    
     
 }
