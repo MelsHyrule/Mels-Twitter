@@ -125,7 +125,6 @@
                                                     <state key="selected" image="favor-icon-red"/>
                                                     <connections>
                                                         <action selector="likeButtonPressed:" destination="U1g-kw-izy" eventType="touchUpInside" id="9bY-f8-R7d"/>
-                                                        <action selector="retweetButtonPressed:" destination="U1g-kw-izy" eventType="touchUpInside" id="zl9-vT-YZh"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNv-TV-LLl">

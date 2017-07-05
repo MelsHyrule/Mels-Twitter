@@ -29,6 +29,10 @@ class ComposeViewController: UIViewController {
         userImageView.layer.cornerRadius = userImageView.frame.size.width/2
         userImageView.layer.masksToBounds = true
         
+        tweetTextView.clipsToBounds = true
+        tweetTextView.layer.cornerRadius = 10.0
+        //tweetTextView.layer.masksToBounds = true
+        
         // Do any additional setup after loading the view.
     }
 
