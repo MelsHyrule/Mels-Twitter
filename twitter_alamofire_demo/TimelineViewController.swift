@@ -19,7 +19,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
-        
         tableView.insertSubview(refreshControl, at: 0)
         
         tableView.dataSource = self
@@ -84,7 +83,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             if let tweets = tweets {
                 self.tweets = tweets
                 self.tableView.reloadData()
-                refreshControl.endRefreshing()
+                //refreshControl.endRefreshing()
                 print("refresh called")
             } else if let error = error {
                 print("Error getting home timeline: " + error.localizedDescription)

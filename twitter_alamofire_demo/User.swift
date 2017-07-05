@@ -13,7 +13,6 @@ class User {
     // For user persistance
     var dictionary: [String: Any]?
     private static var _current: User?
-    
     static var current: User? {
         get {
             if _current == nil {
