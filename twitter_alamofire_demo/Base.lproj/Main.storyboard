@@ -292,6 +292,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="tweetTextView" destination="6s0-Ba-cwP" id="9DS-gh-Egi"/>
                         <outlet property="userImageView" destination="ngh-nK-rhJ" id="1zg-zA-csf"/>
                     </connections>
                 </viewController>

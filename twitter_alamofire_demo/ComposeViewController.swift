@@ -14,6 +14,7 @@ protocol ComposeViewControllerDelegate {
 
 class ComposeViewController: UIViewController {
 
+    @IBOutlet weak var tweetTextView: UITextView!
     @IBOutlet weak var userImageView: UIImageView!
     
     var delegate: ComposeViewControllerDelegate?
@@ -47,7 +48,7 @@ class ComposeViewController: UIViewController {
     */
     
     @IBAction func didTapPost(_ sender: Any) {
-        APIManager.shared.composeTweet(with: "This is my tweet 😀") { (tweet, error) in
+        APIManager.shared.composeTweet(with: tweetTextView.text) { (tweet, error) in
             if let error = error {
                 print("Error composing Tweet: \(error.localizedDescription)")
             } else if let tweet = tweet {
@@ -55,6 +56,8 @@ class ComposeViewController: UIViewController {
                 print("Compose Tweet Success!")
             }
         }
+        self.dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func didTapCancel(_ sender: Any) {
