@@ -9,7 +9,13 @@
 import UIKit
 import AlamofireImage
 
+protocol TweetCellDelegate {
+    func didTapReply(tweet: Tweet)
+}
+
 class TweetCell: UITableViewCell {
+    
+//    weak var delegate: TweetCellDelegate!
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var screenNameLabel: UILabel!
@@ -50,35 +56,43 @@ class TweetCell: UITableViewCell {
     
     
     @IBAction func retweetButtonPressed(_ sender: Any) {
-        if (tweet.retweeted) {
-            tweet.retweeted = false
-            tweet.retweetCount = tweet.retweetCount - 1
-            retweetCountLabel.text = String(tweet.retweetCount)
-        } else {
-            tweet.retweeted = true
-            tweet.retweetCount = tweet.retweetCount + 1
-            retweetCountLabel.text = String(tweet.retweetCount)
-        }
+//        if (tweet.retweeted) {
+//            tweet.retweeted = false
+//            tweet.retweetCount = tweet.retweetCount - 1
+//            retweetCountLabel.text = String(tweet.retweetCount)
+//        } else {
+//            tweet.retweeted = true
+//            tweet.retweetCount = tweet.retweetCount + 1
+//            retweetCountLabel.text = String(tweet.retweetCount)
+//        }
     }
     
     
     @IBAction func likeButtonPressed(_ sender: Any) {
-        if (tweet.favorited!) {
-            tweet.favorited = false
-            tweet.favoriteCount = tweet.favoriteCount! - 1
-            likeCountLabel.text = String(tweet.favoriteCount!)
-        } else {
-            tweet.favorited = true
-            tweet.favoriteCount = tweet.favoriteCount! + 1
-            likeCountLabel.text = String(tweet.favoriteCount!)
+        
+//        if (tweet.favorited!) {
+//            tweet.favorited = false
+//            tweet.favoriteCount = tweet.favoriteCount! - 1
+//        } else {
+//            tweet.favorited = true
+//            tweet.favoriteCount = tweet.favoriteCount! + 1
+//        }
+        APIManager.shared.favoriteTweet(with: tweet.favoriteCount!) { (tweet, error) in
+            if let error = error {
+                print("Error composing Tweet: \(error.localizedDescription)")
+            } else if let tweet = tweet {
+                //self.delegate?.did(post: tweet)
+                print("Compose Tweet Success!")
+            }
 
         }
+//        likeCountLabel.text = String(tweet.favoriteCount!)
+        
     }
     
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
     

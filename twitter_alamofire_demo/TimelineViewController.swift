@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource { //, ComposeViewControllerDelegate {
     
     var tweets: [Tweet] = []
     
@@ -66,7 +66,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         APIManager.shared.logout()
     }
     
-    
     /*
      // MARK: - Navigation
      
@@ -75,7 +74,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
-     */
+    */
     
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
         
@@ -84,13 +83,10 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
                 self.tweets = tweets
                 self.tableView.reloadData()
                 //refreshControl.endRefreshing()
-                print("refresh called")
             } else if let error = error {
                 print("Error getting home timeline: " + error.localizedDescription)
             }
         }
-        
-        
         refreshControl.endRefreshing()
     }
     
