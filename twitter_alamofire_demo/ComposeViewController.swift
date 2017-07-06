@@ -19,7 +19,6 @@ class ComposeViewController: UIViewController {
     
     var delegate: ComposeViewControllerDelegate?
 //    weak var delegate: ComposeViewControllerDelegate?
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +30,6 @@ class ComposeViewController: UIViewController {
         
         tweetTextView.clipsToBounds = true
         tweetTextView.layer.cornerRadius = 10.0
-        //tweetTextView.layer.masksToBounds = true
         
         // Do any additional setup after loading the view.
     }

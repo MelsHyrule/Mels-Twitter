@@ -115,7 +115,7 @@
                                                     <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVZ-RI-taA">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVZ-RI-taA" userLabel="favorite">
                                                     <rect key="frame" x="283" y="70.5" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="KV7-05-N4u"/>
@@ -124,7 +124,7 @@
                                                     <state key="normal" image="favor-icon"/>
                                                     <state key="selected" image="favor-icon-red"/>
                                                     <connections>
-                                                        <action selector="likeButtonPressed:" destination="U1g-kw-izy" eventType="touchUpInside" id="9bY-f8-R7d"/>
+                                                        <action selector="likeButtonPressed:" destination="U1g-kw-izy" eventType="touchUpInside" id="qVD-cz-iEK"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNv-TV-LLl">
@@ -133,7 +133,7 @@
                                                     <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Re-iC-bzJ">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Re-iC-bzJ" userLabel="retweet">
                                                     <rect key="frame" x="164" y="70.5" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="bqR-yR-5fx"/>
@@ -142,7 +142,7 @@
                                                     <state key="normal" image="retweet-icon"/>
                                                     <state key="selected" image="retweet-icon-green"/>
                                                     <connections>
-                                                        <action selector="retweetButtonPressed:" destination="U1g-kw-izy" eventType="touchUpInside" id="hg4-jK-JCU"/>
+                                                        <action selector="retweetButtonPressed:" destination="U1g-kw-izy" eventType="touchUpInside" id="cmq-7v-llh"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="icL-s8-0mU">
@@ -191,7 +191,7 @@
                                             <outlet property="screenNameLabel" destination="fhC-BD-XtV" id="glp-7a-gDo"/>
                                             <outlet property="tweetLabel" destination="Ler-8B-n8p" id="Own-Ev-b3I"/>
                                             <outlet property="userImageView" destination="3Iu-Zr-z78" id="w9H-Pe-KwD"/>
-                                            <segue destination="8fD-ho-2Zh" kind="show" id="IeI-4g-1lb"/>
+                                            <segue destination="8fD-ho-2Zh" kind="show" identifier="detailView" id="IeI-4g-1lb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -349,8 +349,10 @@
                     <navigationItem key="navigationItem" title="Tweet" id="4Ks-kM-VMX"/>
                     <connections>
                         <outlet property="datePostedLabel" destination="N55-JS-Chc" id="ZSW-p4-gKv"/>
+                        <outlet property="favoriteButton" destination="hnG-MX-AkT" id="5X5-Aa-Org"/>
                         <outlet property="likeCountLabel" destination="kFh-Tg-yEL" id="TIa-cp-5Qf"/>
                         <outlet property="nameLabel" destination="Tj0-i6-Nha" id="dxb-0n-NmY"/>
+                        <outlet property="retweetButton" destination="4IE-wM-BhY" id="YlU-E3-zdb"/>
                         <outlet property="retweetCountLabel" destination="AZo-YM-7J1" id="bPJ-fm-xMY"/>
                         <outlet property="screenNameLabel" destination="wGI-Ec-63n" id="COM-mR-sg8"/>
                         <outlet property="tweetLabel" destination="zEe-AA-Ozn" id="PCf-dE-9Sm"/>
