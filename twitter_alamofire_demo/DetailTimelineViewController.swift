@@ -19,14 +19,7 @@ class DetailTimelineViewController: UIViewController {
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var likeCountLabel: UILabel!
     
-    var tweet: Tweet! //{
-//        didSet {
-////            id = tweet.id
-////            
-//            
-//        }
-//    }
-
+    var tweet: Tweet!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,5 +53,57 @@ class DetailTimelineViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    @IBAction func retweetButtonPressed(_ sender: UIButton) {
+        if (sender.isSelected) {
+            tweet.retweeted = false
+            tweet.retweetCount = tweet.retweetCount - 1
+            APIManager.shared.unretweet(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error unretweeting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully unretweeted the following Tweet: \n\(tweet.text)")
+                }
+            }
+        } else {
+            sender.isSelected = true
+            tweet.retweetCount = tweet.retweetCount + 1
+            APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error retweeting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully retweeted the following Tweet: \n\(tweet.text)")
+                }
+            }
+            
+        }
+        retweetCountLabel.text = String(tweet.retweetCount)
+    }
+    
+    @IBAction func likeButtonPressed(_ sender: UIButton) {
+        if (sender.isSelected) {
+            sender.isSelected = false
+            tweet.favoriteCount = tweet.favoriteCount! - 1
+            APIManager.shared.unfavorite(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error unfavorited tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully unfavorited the following Tweet: \n\(tweet.text)")
+                }
+            }
+        } else {
+            sender.isSelected = true
+            tweet.favoriteCount = tweet.favoriteCount! + 1
+            APIManager.shared.favorite(tweet) { (tweet: Tweet?, error: Error?) in
+                if let  error = error {
+                    print("Error favoriting tweet: \(error.localizedDescription)")
+                } else if let tweet = tweet {
+                    print("Successfully favorited the following Tweet: \n\(tweet.text)")
+                }
+            }
+            
+        }
+        likeCountLabel.text = String(tweet.favoriteCount!)
+    }
+    
 }
