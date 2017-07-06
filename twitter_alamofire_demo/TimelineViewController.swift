@@ -66,15 +66,24 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         APIManager.shared.logout()
     }
     
-    /*
-     // MARK: - Navigation
+    
+    // MARK: - Navigation
      
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-    */
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell) {
+            let tweet = tweets[indexPath.row]
+            let detailTimelineViewController = segue.destination as! DetailTimelineViewController
+            detailTimelineViewController.tweet = tweet
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
+    }
+    
     
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
         
