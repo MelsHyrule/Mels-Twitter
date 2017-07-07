@@ -86,9 +86,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
                 detailTimelineViewController.tweet = tweet
                 tableView.deselectRow(at: indexPath, animated: true)
             }
-        }
-        
-        else if (segue.identifier == "profileSegue"){
+        } else if (segue.identifier == "profileSegue"){
             let profileViewController = segue.destination as! ProfileViewController
             let user = sender as! User
             profileViewController.user = user

@@ -30,7 +30,6 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var likeCountLabel: UILabel!
     var id: Int64!
     
-
     
     var tweet: Tweet! {
         didSet {
@@ -56,7 +55,6 @@ class TweetCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapUserProfile(_:)))
-        
         userImageView.addGestureRecognizer(profileTapGestureRecognizer)
         userImageView.isUserInteractionEnabled = true
     }

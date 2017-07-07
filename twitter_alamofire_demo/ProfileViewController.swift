@@ -9,32 +9,36 @@
 import UIKit
 import AlamofireImage
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
+    var tweets: [Tweet] = []
     var user: User = User.current!
-    
-    @IBOutlet weak var profileBackgroundImageView: UIImageView!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var screenNameLabel: UILabel!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var bioLabel: UILabel!
-    @IBOutlet weak var followingCounerLabel: UILabel!
-    @IBOutlet weak var followersCounterLabel: UILabel!
+    var isMoreDataLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        profileBackgroundImageView.af_setImage(withURL: user.backgroundPictureURL!)
- 
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.width/2
-        profileImageView.layer.masksToBounds = true
-        profileImageView.af_setImage(withURL: user.profilePictureURL!)
         
-        screenNameLabel.text = user.name
-        usernameLabel.text = "@" + user.screenName!
-        bioLabel.text = user.description
-        followingCounerLabel.text = String(user.following!)
-        followersCounterLabel.text = String(user.followers!)
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+        
+        APIManager.shared.getUserTimeLine(user: user) { (tweets, error) in
+            if let tweets = tweets {
+                self.tweets = tweets
+                self.tableView.reloadData()
+            } else if let error = error {
+                print("From refresh control: Error getting user timeline: " + error.localizedDescription)
+            }
+        }
+        
         
     }
 
@@ -53,5 +57,62 @@ class ProfileViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (section == 0) {
+            return 1
+        } else {
+            return tweets.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if (indexPath.section == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TopTableViewCell", for: indexPath) as! TopTableViewCell
+            cell.user = user
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+            cell.tweet = tweets[indexPath.row]
+            cell.userImageView.layer.cornerRadius = cell.userImageView.frame.size.width/2
+            cell.userImageView.layer.masksToBounds = true
+            cell.delegate = self
+            return cell
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func reloadData() {
+        APIManager.shared.getHomeTimeLine { (tweets, error) in
+            if let tweets = tweets {
+                self.tweets += tweets
+                self.tableView.reloadData()
+                self.isMoreDataLoading = false
+            } else if let error = error {
+                print("From refresh control: Error getting user timeline: " + error.localizedDescription)
+            }
+        }
+    }
+
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        APIManager.shared.getUserTimeLine(user: user) { (tweets, error) in
+            if let tweets = tweets {
+                self.tweets = tweets
+                self.tableView.reloadData()
+            } else if let error = error {
+                print("From refresh control: Error getting user timeline: " + error.localizedDescription)
+            }
+        }
+        refreshControl.endRefreshing()
+    }
+    
+    func tweetCell(_ tweetCell: TweetCell, didTap user: User) {
+        // TODO: Perform segue to profile view controller
+        performSegue(withIdentifier: "profileSegue", sender: user)
+    }
+
 
 }

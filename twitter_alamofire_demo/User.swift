@@ -37,9 +37,10 @@ class User {
     }
     
     var name: String?
+    var id: Int64?
     var screenName: String?
     var profilePictureURL: URL?
-    var backgroundPictureURL: URL?
+    //var backgroundPictureURL: URL?
     var description: String?
     var following: Int?
     var followers: Int?
@@ -48,11 +49,13 @@ class User {
         self.dictionary = dictionary
         
         name = dictionary["name"] as! String
+        id = dictionary["id"] as! Int64
         screenName = dictionary["screen_name"] as! String
         profilePictureURL = URL(string: dictionary["profile_image_url_https"] as! String)
-        backgroundPictureURL = URL(string: dictionary["profile_banner_url"] as! String) //profile_banner_url
+        //backgroundPictureURL = URL(string: dictionary["profile_banner_url"] as! String) //profile_banner_url
         description = dictionary["description"] as! String
         following = dictionary["friends_count"] as! Int
         followers = dictionary["followers_count"] as! Int
+        
     }
 }
