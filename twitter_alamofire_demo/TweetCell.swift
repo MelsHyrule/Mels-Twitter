@@ -9,14 +9,15 @@
 import UIKit
 import AlamofireImage
 
-protocol TweetCellDelegate {
-    //func didTapReply(tweet: Tweet)
-    //    func reloadTableTest()
+protocol TweetCellDelegate: class {
+    // TODO: Add required methods the delegate needs to implement
+    func tweetCell(_ tweetCell: TweetCell, didTap user: User)
 }
+
 
 class TweetCell: UITableViewCell {
     
-    var delegate: TweetCellDelegate!
+    weak var delegate: TweetCellDelegate?
     var test: TimelineViewController!
     
     @IBOutlet weak var userImageView: UIImageView!
@@ -28,6 +29,8 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var likeCountLabel: UILabel!
     var id: Int64!
+    
+
     
     var tweet: Tweet! {
         didSet {
@@ -52,6 +55,10 @@ class TweetCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        let profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapUserProfile(_:)))
+        
+        userImageView.addGestureRecognizer(profileTapGestureRecognizer)
+        userImageView.isUserInteractionEnabled = true
     }
     
     
@@ -126,6 +133,11 @@ class TweetCell: UITableViewCell {
         //        print("lmao")
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
+    }
+    
+    func didTapUserProfile(_ sender: UITapGestureRecognizer) {
+        // TODO: Call method on delegate
+        delegate?.tweetCell(self, didTap: tweet.user)
     }
     
 }

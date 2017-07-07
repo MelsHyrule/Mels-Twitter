@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate { //, ComposeViewControllerDelegate {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, TweetCellDelegate { //, ComposeViewControllerDelegate {
     
     var tweets: [Tweet] = []
     var isMoreDataLoading = false
@@ -49,6 +49,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         cell.tweet = tweets[indexPath.row]
         cell.userImageView.layer.cornerRadius = cell.userImageView.frame.size.width/2
         cell.userImageView.layer.masksToBounds = true
+        cell.delegate = self
         
         return cell
     }
@@ -77,7 +78,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        
         if (segue.identifier == "detailView"){
             let cell = sender as! UITableViewCell
             if let indexPath = tableView.indexPath(for: cell) {
@@ -87,6 +87,13 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
                 tableView.deselectRow(at: indexPath, animated: true)
             }
         }
+        
+        else if (segue.identifier == "profileSegue"){
+            let profileViewController = segue.destination as! ProfileViewController
+            let user = sender as! User
+            profileViewController.user = user
+        }
+        
     }
     
     
@@ -135,5 +142,11 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
+    
+    func tweetCell(_ tweetCell: TweetCell, didTap user: User) {
+        // TODO: Perform segue to profile view controller
+        performSegue(withIdentifier: "profileSegue", sender: user)
+    }
+
     
 }
