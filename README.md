@@ -50,7 +50,14 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/lMUmzj3.gifv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://raw.githubusercontent.com/MelsHyrule/Mels-Twitter/master/tweet1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+<img src='https://raw.githubusercontent.com/MelsHyrule/Mels-Twitter/master/tweet2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+<img src='https://raw.githubusercontent.com/MelsHyrule/Mels-Twitter/master/tweet3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+<img src='https://raw.githubusercontent.com/MelsHyrule/Mels-Twitter/master/tweet4.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
